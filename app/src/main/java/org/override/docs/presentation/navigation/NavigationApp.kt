@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -15,11 +16,12 @@ import org.override.docs.presentation.features.login.LoginRoot
 
 @Composable
 fun NavigationApp(
-    navController: NavHostController
+    navController: NavHostController,
+    startDestination: String = RoutesApp.Login.route,
 ) {
     NavHost(
         navController = navController,
-        startDestination = RoutesApp.Login.route,
+        startDestination = startDestination,
         modifier = Modifier.fillMaxSize()
     ) {
         composable(RoutesApp.Login.route) {
@@ -35,7 +37,8 @@ fun NavigationApp(
 
         composable(RoutesApp.Home.route) {
             Box(
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
             ) {
                 Text(
                     text = "Home",
