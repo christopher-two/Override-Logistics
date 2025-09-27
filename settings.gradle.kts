@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Docs"
+rootProject.name = "OverrideLogistics"
 include(":app")

@@ -8,6 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import org.koin.compose.viewmodel.koinViewModel
 import org.override.docs.core.common.RoutesApp
+import org.override.docs.presentation.features.haulier.HaulierRoot
 import org.override.docs.presentation.features.login.LoginRoot
 import org.override.docs.presentation.features.warehouse.presentation.WarehouseRoot
 
@@ -34,6 +35,12 @@ fun NavigationApp(
 
         composable(RoutesApp.Warehouse.route) {
             WarehouseRoot(
+                viewModel = koinViewModel()
+            )
+        }
+
+        composable(RoutesApp.Haulier.route) {
+            HaulierRoot(
                 viewModel = koinViewModel()
             )
         }

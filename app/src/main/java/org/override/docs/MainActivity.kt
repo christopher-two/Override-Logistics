@@ -48,7 +48,7 @@ class MainActivity : ComponentActivity() {
                     true -> {
                         NavigationApp(
                             navController = rememberNavController(),
-                            startDestination = RoutesApp.Warehouse.route
+                            startDestination = RoutesApp.Haulier.route
                         )
                     }
 

@@ -6,4 +6,6 @@ sealed class RoutesApp(
     object Login : RoutesApp("Login")
 
     object Warehouse : RoutesApp("Warehouse")
+
+    object Haulier : RoutesApp("Haulier")
 }
