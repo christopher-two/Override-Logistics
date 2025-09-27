@@ -4,7 +4,6 @@ sealed class RoutesApp(
     val route: String
 ) {
     object Login : RoutesApp("Login")
-    object Home : RoutesApp("Home")
-    object Profile : RoutesApp("Profile")
-    object Settings : RoutesApp("Settings")
+
+    object Warehouse : RoutesApp("Warehouse")
 }

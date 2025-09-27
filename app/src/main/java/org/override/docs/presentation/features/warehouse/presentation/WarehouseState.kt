@@ -1,4 +1,4 @@
-package org.override.docs.presentation.features.warehouse
+package org.override.docs.presentation.features.warehouse.presentation
 
 data class WarehouseState(
     val paramOne: String = "default",

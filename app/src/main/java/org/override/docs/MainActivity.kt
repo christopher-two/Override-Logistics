@@ -28,20 +28,15 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             val userLoggedInUseCase = koinInject<IsUserLoggedInUseCase>().invoke()
-
-            // 1. Usa un Boolean nulable. 'null' será nuestro estado de carga.
             var isLogged: Boolean? by remember { mutableStateOf(null) }
 
-            // 2. El LaunchedEffect sigue igual, pero ahora actualizará de 'null' a 'true' o 'false'.
             LaunchedEffect(key1 = Unit) {
                 isLogged = userLoggedInUseCase.firstOrNull() ?: false
             }
 
             DocsTheme {
-                // 3. Muestra contenido diferente según el estado.
                 when (isLogged) {
                     null -> {
-                        // Estado de carga: Muestra un indicador o tu splash screen.
                         Box(
                             modifier = Modifier.fillMaxSize(),
                             contentAlignment = Alignment.Center
@@ -51,15 +46,13 @@ class MainActivity : ComponentActivity() {
                     }
 
                     true -> {
-                        // Usuario logueado: Navega directamente a Home.
                         NavigationApp(
                             navController = rememberNavController(),
-                            startDestination = RoutesApp.Home.route
+                            startDestination = RoutesApp.Warehouse.route
                         )
                     }
 
                     false -> {
-                        // Usuario no logueado: Navega directamente a Login.
                         NavigationApp(
                             navController = rememberNavController(),
                             startDestination = RoutesApp.Login.route

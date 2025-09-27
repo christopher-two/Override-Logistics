@@ -7,8 +7,10 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.colorspace.ColorSpaces
 import com.materialkolor.DynamicMaterialTheme
 import com.materialkolor.PaletteStyle
+import com.materialkolor.dynamiccolor.ColorSpec
 
 @Composable
 fun DocsTheme(
@@ -19,6 +21,7 @@ fun DocsTheme(
         seedColor = Color(0xFF0061A4),
         isDark = darkTheme,
         style = PaletteStyle.Monochrome,
+        specVersion = ColorSpec.SpecVersion.SPEC_2025,
         content = {
             Surface(
                 color = colorScheme.background,

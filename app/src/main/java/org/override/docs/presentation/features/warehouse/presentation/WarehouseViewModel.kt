@@ -1,4 +1,4 @@
-package org.override.docs.presentation.features.warehouse
+package org.override.docs.presentation.features.warehouse.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

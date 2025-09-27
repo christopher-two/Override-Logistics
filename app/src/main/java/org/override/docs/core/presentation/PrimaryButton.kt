@@ -1,5 +1,6 @@
 package org.override.docs.core.presentation
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -14,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -23,8 +25,8 @@ fun PrimaryButton(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     loading: Boolean = false,
-    contentColor: Color = colorScheme.onPrimaryContainer,
-    containerColor: Color = colorScheme.primaryContainer
+    contentColor: Color = colorScheme.onSurface,
+    containerColor: Color = colorScheme.surfaceContainerHighest
 ) {
     Button(
         onClick = onClick,
@@ -36,7 +38,8 @@ fun PrimaryButton(
             contentColor = contentColor,
             containerColor = containerColor
         ),
-        shape = RoundedCornerShape(8.dp)
+        shape = RectangleShape,
+        border = BorderStroke(2.dp, colorScheme.outline)
     ) {
         if (loading) {
             Box(contentAlignment = Alignment.Center) {

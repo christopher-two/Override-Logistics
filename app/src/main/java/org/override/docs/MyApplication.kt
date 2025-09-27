@@ -32,7 +32,9 @@ import org.override.docs.domain.session.usecase.ClearUserSessionUseCase
 import org.override.docs.domain.session.usecase.GetCurrentUserIdUseCase
 import org.override.docs.domain.session.usecase.IsUserLoggedInUseCase
 import org.override.docs.domain.session.usecase.SaveUserSessionUseCase
+import org.override.docs.presentation.features.haulier.HaulierViewModel
 import org.override.docs.presentation.features.login.LoginViewModel
+import org.override.docs.presentation.features.warehouse.presentation.WarehouseViewModel
 
 private val Context.sessionDataStore: DataStore<Preferences> by preferencesDataStore(name = "session_prefs")
 private val Context.settingsDataStore: DataStore<Preferences> by preferencesDataStore(name = "settings_prefs")
@@ -61,6 +63,8 @@ class MyApplication : Application(), KoinComponent {
     val viewModelModule: Module
         get() = module {
             viewModelOf(::LoginViewModel)
+            viewModelOf(::WarehouseViewModel)
+            viewModelOf(::HaulierViewModel)
         }
 
     val sessionRepositoryModule: Module
