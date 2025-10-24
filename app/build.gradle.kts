@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace = "org.override.docs"
+    namespace = "org.override.logistics"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "org.override.docs"
+        applicationId = "org.override.logistics"
         minSdk = 23
         targetSdk = 36
         versionCode = 1
@@ -54,6 +54,7 @@ dependencies {
     implementation(libs.androidx.navigation.runtime.ktx)
     implementation(libs.material.kolor)
     implementation(libs.composeIcons.fontAwesome)
+    implementation(libs.androidx.core.splashscreen)
 
     // Inyección de dependencias
     implementation(platform(libs.koin.bom))
