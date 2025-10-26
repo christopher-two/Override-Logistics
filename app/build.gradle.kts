@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId = "org.override.logistics"
-        minSdk = 23
+        minSdk = 29
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
@@ -42,6 +42,27 @@ android {
 }
 
 dependencies {
+    // Implementaciones de Modulos
+
+    // Core
+    implementation(project(":core:common"))
+    implementation(project(":core:ui"))
+
+    // Features
+    implementation(project(":features:haulier:presentation"))
+    implementation(project(":features:wharehouse:presentation"))
+
+    implementation(project(":features:login:domain"))
+    implementation(project(":features:login:presentation"))
+
+    // Data
+    implementation(project(":data:auth:api"))
+    implementation(project(":data:auth:impl"))
+
+    implementation(project(":data:session:api"))
+    implementation(project(":data:session:impl"))
+
+
     // Implementaciones principales
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -52,8 +73,8 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.navigation.runtime.ktx)
-    implementation(libs.material.kolor)
     implementation(libs.composeIcons.fontAwesome)
+    implementation(libs.material.kolor)
     implementation(libs.androidx.core.splashscreen)
 
     // Inyección de dependencias

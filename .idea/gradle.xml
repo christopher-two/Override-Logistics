@@ -11,6 +11,25 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/core/common" />
+            <option value="$PROJECT_DIR$/core/ui" />
+            <option value="$PROJECT_DIR$/data" />
+            <option value="$PROJECT_DIR$/data/auth" />
+            <option value="$PROJECT_DIR$/data/auth/api" />
+            <option value="$PROJECT_DIR$/data/auth/impl" />
+            <option value="$PROJECT_DIR$/data/session" />
+            <option value="$PROJECT_DIR$/data/session/api" />
+            <option value="$PROJECT_DIR$/data/session/impl" />
+            <option value="$PROJECT_DIR$/features" />
+            <option value="$PROJECT_DIR$/features/haulier" />
+            <option value="$PROJECT_DIR$/features/haulier/presentation" />
+            <option value="$PROJECT_DIR$/features/login" />
+            <option value="$PROJECT_DIR$/features/login/domain" />
+            <option value="$PROJECT_DIR$/features/login/presentation" />
+            <option value="$PROJECT_DIR$/features/wharehouse" />
+            <option value="$PROJECT_DIR$/features/wharehouse/domain" />
+            <option value="$PROJECT_DIR$/features/wharehouse/presentation" />
           </set>
         </option>
       </GradleProjectSettings>

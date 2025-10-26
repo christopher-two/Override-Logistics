@@ -17,24 +17,24 @@ import org.koin.core.qualifier.named
 import org.koin.dsl.bind
 import org.koin.dsl.module
 import org.override.logistics.data.auth.api.plataform.FirebaseAuthManager
-import org.override.logistics.data.auth.impl.firebase.FirebaseAuthManagerImpl
+import org.override.logistics.data.auth.impl.FirebaseAuthManagerImpl
 import org.override.logistics.data.session.api.SessionRepository
-import org.override.logistics.data.session.impl.datastore.SessionDataStoreRepositoryImpl
+import org.override.logistics.data.session.impl.SessionDataStoreRepositoryImpl
 import org.override.logistics.domain.auth.usecase.CreateUserWithEmailAndPasswordUseCase
 import org.override.logistics.domain.auth.usecase.DeleteCurrentUserUseCase
 import org.override.logistics.domain.auth.usecase.GetCurrentUserUseCase
 import org.override.logistics.domain.auth.usecase.ReauthenticateUseCase
 import org.override.logistics.domain.auth.usecase.SendPasswordResetEmailUseCase
 import org.override.logistics.domain.auth.usecase.SignInWithCredentialUseCase
-import org.override.logistics.domain.auth.usecase.SignInWithEmailAndPasswordUseCase
 import org.override.logistics.domain.auth.usecase.SignOutUseCase
 import org.override.logistics.domain.session.usecase.ClearUserSessionUseCase
 import org.override.logistics.domain.session.usecase.GetCurrentUserIdUseCase
 import org.override.logistics.domain.session.usecase.IsUserLoggedInUseCase
-import org.override.logistics.domain.session.usecase.SaveUserSessionUseCase
-import org.override.logistics.presentation.features.haulier.HaulierViewModel
-import org.override.logistics.presentation.features.login.LoginViewModel
-import org.override.logistics.presentation.features.warehouse.presentation.WarehouseViewModel
+import org.override.logistics.features.haulier.presentation.HaulierViewModel
+import org.override.logistics.features.login.domain.SaveUserSessionUseCase
+import org.override.logistics.features.login.domain.SignInWithEmailAndPasswordUseCase
+import org.override.logistics.features.login.presentation.LoginViewModel
+import org.override.logistics.features.wharehouse.presentation.WarehouseViewModel
 
 private val Context.sessionDataStore: DataStore<Preferences> by preferencesDataStore(name = "session_prefs")
 private val Context.settingsDataStore: DataStore<Preferences> by preferencesDataStore(name = "settings_prefs")

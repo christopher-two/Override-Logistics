@@ -20,8 +20,8 @@ import kotlinx.coroutines.flow.firstOrNull
 import org.koin.compose.koinInject
 import org.override.logistics.core.common.RoutesApp
 import org.override.logistics.domain.session.usecase.IsUserLoggedInUseCase
-import org.override.logistics.presentation.navigation.NavigationApp
-import org.override.logistics.presentation.theme.DocsTheme
+import org.override.logistics.navigation.NavigationApp
+import org.override.logistics.core.ui.theme.OverrideLogisticsTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +38,7 @@ class MainActivity : ComponentActivity() {
 
             splashScreen.setKeepOnScreenCondition { false }
 
-            DocsTheme {
+            OverrideLogisticsTheme {
                 when (isLogged) {
                     null -> {
                         Box(

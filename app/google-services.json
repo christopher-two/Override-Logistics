@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "1098717638853",
-    "project_id": "overridedocs",
-    "storage_bucket": "overridedocs.firebasestorage.app"
+    "project_number": "706528129023",
+    "project_id": "override-logistics",
+    "storage_bucket": "override-logistics.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1098717638853:android:3cd9d8d947938e597680ac",
+        "mobilesdk_app_id": "1:706528129023:android:96a70f76bf5a8070c241ca",
         "android_client_info": {
-          "package_name": "org.override.docs"
+          "package_name": "org.override.logistics"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBciSNTiJWh8oRL5hintGiFOCEAh0SBQfM"
+          "current_key": "AIzaSyChf-G3FFkEpo_5eiQcYGMbazGhW4OoIIo"
         }
       ],
       "services": {
