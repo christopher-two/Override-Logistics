@@ -1,4 +1,4 @@
-package org.override.logistics.features.wharehouse.presentation.components
+package org.override.logistics.core.ui.search
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size

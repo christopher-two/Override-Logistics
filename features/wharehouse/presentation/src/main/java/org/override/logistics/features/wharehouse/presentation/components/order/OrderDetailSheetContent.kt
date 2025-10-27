@@ -1,4 +1,4 @@
-package org.override.logistics.features.wharehouse.presentation.components
+package org.override.logistics.features.wharehouse.presentation.components.order
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box

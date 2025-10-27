@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import compose.icons.FontAwesomeIcons
 import compose.icons.fontawesomeicons.Solid
 import compose.icons.fontawesomeicons.solid.Check
+import org.override.logistics.core.ui.ChipBrutalism
 import org.override.logistics.features.wharehouse.domain.OrderStatus
 
 /**
@@ -40,26 +41,10 @@ fun StatusFilterRow(
         // Chip para "Todos"
         item {
             val isSelected = selectedStatus == null
-            FilterChip(
-                selected = isSelected,
-                shape = RectangleShape,
-                border = BorderStroke(2.dp, colorScheme.onBackground),
-                colors = FilterChipDefaults.filterChipColors(
-                    containerColor = colorScheme.surfaceContainerLowest,
-                    labelColor = colorScheme.onSurface
-                ),
-                onClick = { onStatusSelected(null) },
-                label = { Text("Todos") },
-                leadingIcon = if (isSelected) {
-                    {
-                        Icon(
-                            FontAwesomeIcons.Solid.Check,
-                            contentDescription = "Seleccionado",
-                            modifier = Modifier.size(16.dp)
-                        )
-                    }
-                } else null
-            )
+            ChipBrutalism(
+                label = "Todos",
+                isSelected = isSelected
+            ) { onStatusSelected(null) }
         }
         // Chips para cada estado
         items(OrderStatus.entries.toTypedArray()) { status ->

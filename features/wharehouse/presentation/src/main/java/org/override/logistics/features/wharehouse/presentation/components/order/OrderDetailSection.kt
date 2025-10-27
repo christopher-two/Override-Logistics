@@ -1,4 +1,4 @@
-package org.override.logistics.features.wharehouse.presentation.components
+package org.override.logistics.features.wharehouse.presentation.components.order
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import org.override.logistics.core.ui.DetailRow
 import org.override.logistics.features.wharehouse.domain.Order
 
 /**

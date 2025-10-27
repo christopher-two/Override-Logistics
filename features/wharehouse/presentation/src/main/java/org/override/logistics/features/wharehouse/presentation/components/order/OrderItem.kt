@@ -1,4 +1,4 @@
-package org.override.logistics.features.wharehouse.presentation.components
+package org.override.logistics.features.wharehouse.presentation.components.order
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
