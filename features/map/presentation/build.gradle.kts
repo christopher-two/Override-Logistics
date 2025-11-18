@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "org.override.logistics.features.haulier.presentation"
+    namespace = "org.override.features.map.presentation"
     compileSdk {
         version = release(36)
     }
@@ -60,10 +60,8 @@ dependencies {
     implementation(libs.kotlinx.datetime)
     implementation(libs.kotlinx.serialization.json)
 
-    // Inyección de dependencias
-    implementation(platform(libs.koin.bom))
-    implementation(libs.koin.androidx.compose)
-    implementation(libs.koin.android)
+    implementation(libs.android.ndk27)
+    implementation(libs.maps.compose.ndk27)
 
     // Dependencias para depuración
     debugImplementation(libs.androidx.compose.ui.tooling)

@@ -7,6 +7,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import org.koin.compose.viewmodel.koinViewModel
+import org.override.features.map.presentation.MapRoot
 import org.override.logistics.core.common.RoutesApp
 import org.override.logistics.features.haulier.presentation.HaulierRoot
 import org.override.logistics.features.login.presentation.LoginRoot
@@ -26,7 +27,7 @@ fun NavigationApp(
             LoginRoot(
                 viewModel = koinViewModel(),
                 onLoginSuccess = {
-                    navController.navigate(RoutesApp.Warehouse.route) {
+                    navController.navigate(RoutesApp.Haulier.route) {
                         popUpTo(RoutesApp.Login.route) { inclusive = true }
                     }
                 }
@@ -41,6 +42,13 @@ fun NavigationApp(
 
         composable(RoutesApp.Haulier.route) {
             HaulierRoot(
+                viewModel = koinViewModel(),
+                onMapNavigate = { navController.navigate(RoutesApp.Map.route) }
+            )
+        }
+
+        composable(RoutesApp.Map.route) {
+            MapRoot(
                 viewModel = koinViewModel()
             )
         }

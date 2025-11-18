@@ -7,5 +7,11 @@ sealed class RoutesApp(
 
     object Warehouse : RoutesApp("Warehouse")
 
-    object Haulier : RoutesApp("Haulier")
+    object Haulier : RoutesApp("Haulier") {
+        const val DASHBOARD = "Dashboard"
+        const val CHECKLIST = "Checklist"
+        const val DELIVERY = "Delivery"
+    }
+
+    object Map : RoutesApp("Map")
 }

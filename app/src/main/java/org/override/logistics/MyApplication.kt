@@ -16,6 +16,7 @@ import org.koin.core.module.dsl.viewModelOf
 import org.koin.core.qualifier.named
 import org.koin.dsl.bind
 import org.koin.dsl.module
+import org.override.features.map.presentation.MapViewModel
 import org.override.logistics.data.auth.api.plataform.FirebaseAuthManager
 import org.override.logistics.data.auth.impl.FirebaseAuthManagerImpl
 import org.override.logistics.data.session.api.SessionRepository
@@ -31,6 +32,7 @@ import org.override.logistics.domain.session.usecase.ClearUserSessionUseCase
 import org.override.logistics.domain.session.usecase.GetCurrentUserIdUseCase
 import org.override.logistics.domain.session.usecase.IsUserLoggedInUseCase
 import org.override.logistics.features.haulier.presentation.HaulierViewModel
+import org.override.logistics.features.haulier.presentation.screens.dashboard.DashboardViewModel
 import org.override.logistics.features.login.domain.SaveUserSessionUseCase
 import org.override.logistics.features.login.domain.SignInWithEmailAndPasswordUseCase
 import org.override.logistics.features.login.presentation.LoginViewModel
@@ -64,7 +66,11 @@ class MyApplication : Application(), KoinComponent {
         get() = module {
             viewModelOf(::LoginViewModel)
             viewModelOf(::WarehouseViewModel)
+            viewModelOf(::MapViewModel)
+
+            //Haulier
             viewModelOf(::HaulierViewModel)
+            viewModelOf(::DashboardViewModel)
         }
 
     val sessionRepositoryModule: Module

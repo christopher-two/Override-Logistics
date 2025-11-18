@@ -36,7 +36,7 @@ class MainActivity : ComponentActivity() {
                 isLogged = userLoggedInUseCase.firstOrNull() ?: false
             }
 
-            splashScreen.setKeepOnScreenCondition { false }
+            splashScreen.setKeepOnScreenCondition { isLogged == null }
 
             OverrideLogisticsTheme {
                 when (isLogged) {
@@ -52,7 +52,7 @@ class MainActivity : ComponentActivity() {
                     true -> {
                         NavigationApp(
                             navController = rememberNavController(),
-                            startDestination = RoutesApp.Warehouse.route
+                            startDestination = RoutesApp.Haulier.route
                         )
                     }
 

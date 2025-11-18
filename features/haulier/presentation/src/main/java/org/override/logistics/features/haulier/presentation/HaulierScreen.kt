@@ -1,5 +1,6 @@
 package org.override.logistics.features.haulier.presentation
 
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
@@ -13,20 +14,24 @@ import org.override.logistics.features.haulier.presentation.components.ShipmentS
 
 @Composable
 fun HaulierRoot(
-    viewModel: HaulierViewModel
+    viewModel: HaulierViewModel,
+    onMapNavigate: () -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     HaulierScreen(
         state = state,
-        onAction = viewModel::onAction
+        onAction = viewModel::onAction,
+        onMapNavigate = onMapNavigate
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun HaulierScreen(
     state: HaulierState,
     onAction: (HaulierAction) -> Unit,
+    onMapNavigate: () -> Unit
 ) {
     val sampleShipments = remember {
         mutableStateListOf(
@@ -48,7 +53,7 @@ private fun HaulierScreen(
         checklistItems = checklistItems,
         onShowShipmentDetails = { /* Logica */ },
         onAcceptShipmentWithSignature = { /* Logica */ },
-        onOpenInMaps = { /* Logica */ },
+        onOpenInMaps = { onMapNavigate() },
         onChecklistItemToggle = { id ->
             val index = checklistItems.indexOfFirst { it.id == id }
             if (index != -1) {
@@ -67,6 +72,7 @@ private fun HaulierScreen(
 private fun Preview() {
     HaulierScreen(
         state = HaulierState(),
-        onAction = {}
+        onAction = {},
+        onMapNavigate = {}
     )
 }

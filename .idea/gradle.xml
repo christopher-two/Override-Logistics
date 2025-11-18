@@ -27,6 +27,8 @@
             <option value="$PROJECT_DIR$/features/login" />
             <option value="$PROJECT_DIR$/features/login/domain" />
             <option value="$PROJECT_DIR$/features/login/presentation" />
+            <option value="$PROJECT_DIR$/features/map" />
+            <option value="$PROJECT_DIR$/features/map/presentation" />
             <option value="$PROJECT_DIR$/features/wharehouse" />
             <option value="$PROJECT_DIR$/features/wharehouse/domain" />
             <option value="$PROJECT_DIR$/features/wharehouse/presentation" />

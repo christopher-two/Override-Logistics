@@ -16,6 +16,9 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven {
+            url = uri("https://api.mapbox.com/downloads/v2/releases/maven")
+        }
     }
 }
 
@@ -32,3 +35,4 @@ include(":data:auth:api")
 include(":data:session:api")
 include(":data:auth:impl")
 include(":data:session:impl")
+include(":features:map:presentation")

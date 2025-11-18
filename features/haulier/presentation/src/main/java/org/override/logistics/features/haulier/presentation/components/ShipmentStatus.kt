@@ -6,7 +6,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -32,6 +31,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -47,16 +47,22 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import compose.icons.FontAwesomeIcons
 import compose.icons.fontawesomeicons.Solid
 import compose.icons.fontawesomeicons.solid.Camera
 import compose.icons.fontawesomeicons.solid.Check
 import compose.icons.fontawesomeicons.solid.CheckCircle
-import compose.icons.fontawesomeicons.solid.History
 import compose.icons.fontawesomeicons.solid.Map
 import compose.icons.fontawesomeicons.solid.Route
 import compose.icons.fontawesomeicons.solid.Tasks
+import org.koin.androidx.compose.koinViewModel
+import org.override.logistics.core.common.RoutesApp
+import org.override.logistics.core.ui.BrutalistButton
 import org.override.logistics.core.ui.theme.OverrideLogisticsTheme
+import org.override.logistics.features.haulier.presentation.screens.dashboard.DashboardRoot
 
 // --- MODELOS DE DATOS ---
 
@@ -121,19 +127,27 @@ fun CarrierDashboardScreen(
     onConfirmDelivery: (shipmentId: String, customerSignature: Boolean, photoTaken: Boolean) -> Unit,
     onShowTripHistory: () -> Unit
 ) {
-    // Este estado sería controlado por el ViewModel en una app real.
-    // Aquí se usa para simular la navegación entre las diferentes vistas de la pantalla.
-    var currentView by remember { mutableStateOf("dashboard") }
+    var currentView by remember { mutableStateOf(RoutesApp.Haulier.DASHBOARD) }
     var selectedShipment by remember { mutableStateOf<Shipment?>(null) }
+    val navController = rememberNavController()
 
+    LaunchedEffect(currentView) {
+        val currentRoute = navController.currentDestination?.route
+        if (currentRoute != currentView) {
+            navController.navigate(currentView) {
+                launchSingleTop = true
+                restoreState = true
+            }
+        }
+    }
 
     Scaffold(
         topBar = {
             BrutalistTopBar(
                 title = when (currentView) {
-                    "dashboard" -> "MIS VIAJES DE HOY"
-                    "checklist" -> "CHECKLIST PRE-VIAJE"
-                    "delivery" -> "ENTREGA: #${selectedShipment?.id}"
+                    RoutesApp.Haulier.DASHBOARD -> "MIS VIAJES DE HOY"
+                    RoutesApp.Haulier.CHECKLIST -> "CHECKLIST PRE-VIAJE"
+                    RoutesApp.Haulier.DELIVERY -> "ENTREGA: #${selectedShipment?.id}"
                     else -> "PANEL DE CHOFER"
                 }
             )
@@ -143,41 +157,36 @@ fun CarrierDashboardScreen(
         Column(modifier = Modifier.padding(padding)) {
             NotificationBanner(
                 text = "¡Nuevo embarque asignado en tu ruta!",
-                isVisible = true // Esto sería controlado por el estado
+                isVisible = true
             )
-
-            // Contenido dinámico
-            when (currentView) {
-                "dashboard" -> ShipmentDashboardView(
-                    shipments = assignedShipments,
-                    onViewDetails = {
-                        selectedShipment = it
-                        // Aquí se podría mostrar un detalle, o pasar a la siguiente fase
-                        // Para el ejemplo, pasaremos al checklist
-                        currentView = "checklist"
-                    },
-                    onOpenInMaps = onOpenInMaps,
-                    onShowTripHistory = onShowTripHistory
-                )
-
-                "checklist" -> PreTripChecklistView(
-                    items = checklistItems,
-                    onToggle = onChecklistItemToggle,
-                    onConfirm = {
-                        onStartRoute()
-                        currentView = "delivery" // Simula que pasamos a la entrega
-                    }
-                )
-
-                "delivery" -> selectedShipment?.let {
-                    DeliveryProcessView(
-                        shipment = it,
-                        onConfirm = { signature, photo ->
-                            onConfirmDelivery(it.id, signature, photo)
-                            currentView = "dashboard" // Vuelve al panel
-                        },
-                        onAcceptCustody = { onAcceptShipmentWithSignature(it.id) }
+            NavHost(
+                navController = navController,
+                startDestination = RoutesApp.Haulier.DASHBOARD
+            ) {
+                composable(RoutesApp.Haulier.DASHBOARD) {
+                    DashboardRoot(koinViewModel())
+                }
+                composable(RoutesApp.Haulier.CHECKLIST) {
+                    PreTripChecklistView(
+                        items = checklistItems,
+                        onToggle = onChecklistItemToggle,
+                        onConfirm = {
+                            onStartRoute()
+                            currentView = "delivery"
+                        }
                     )
+                }
+                composable(RoutesApp.Haulier.DELIVERY) {
+                    selectedShipment?.let {
+                        DeliveryProcessView(
+                            shipment = it,
+                            onConfirm = { signature, photo ->
+                                onConfirmDelivery(it.id, signature, photo)
+                                currentView = "dashboard" // Vuelve al panel
+                            },
+                            onAcceptCustody = { onAcceptShipmentWithSignature(it.id) }
+                        )
+                    }
                 }
             }
         }
@@ -186,38 +195,6 @@ fun CarrierDashboardScreen(
 
 
 // --- VISTAS DE LA PANTALLA ---
-
-@Composable
-private fun ShipmentDashboardView(
-    shipments: List<Shipment>,
-    onViewDetails: (Shipment) -> Unit,
-    onOpenInMaps: (String) -> Unit,
-    onShowTripHistory: () -> Unit
-) {
-    LazyColumn(
-        contentPadding = PaddingValues(16.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
-    ) {
-        items(shipments) { shipment ->
-            ShipmentCard(
-                shipment = shipment,
-                onViewDetails = { onViewDetails(shipment) },
-                onOpenInMaps = { onOpenInMaps(shipment.address) }
-            )
-        }
-        item {
-            BrutalistButton(
-                text = "VER HISTORIAL DE VIAJES",
-                onClick = onShowTripHistory,
-                icon = FontAwesomeIcons.Solid.History,
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colorScheme.secondary,
-                    contentColor = MaterialTheme.colorScheme.onSecondary
-                )
-            )
-        }
-    }
-}
 
 @Composable
 private fun PreTripChecklistView(
@@ -324,7 +301,7 @@ private fun DeliveryProcessView(
 // --- COMPONENTES REUTILIZABLES DE ESTILO BRUTALISTA ---
 
 @Composable
-private fun ShipmentCard(shipment: Shipment, onViewDetails: () -> Unit, onOpenInMaps: () -> Unit) {
+fun ShipmentCard(shipment: Shipment, onViewDetails: () -> Unit, onOpenInMaps: () -> Unit) {
     Card(
         shape = RectangleShape,
         modifier = Modifier
@@ -503,7 +480,7 @@ private fun BrutalistTopBar(title: String) {
 }
 
 @Composable
-private fun BrutalistButton(
+fun BrutalistButton(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,

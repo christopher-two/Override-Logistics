@@ -55,6 +55,8 @@ dependencies {
     implementation(project(":features:login:domain"))
     implementation(project(":features:login:presentation"))
 
+    implementation(project(":features:map:presentation"))
+
     // Data
     implementation(project(":data:auth:api"))
     implementation(project(":data:auth:impl"))
